@@ -21,5 +21,5 @@ while(True):
     # while pygame.mixer.music.get_busy():
     #     pygame.time.Clock().tick(60)
     takt += 1
-    print("takt",takt)
+    print("takt", takt, " time= ", times-0.2)
     time.sleep(times)
