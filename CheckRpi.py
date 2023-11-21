@@ -21,7 +21,6 @@ pygame.init()
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 a = 0
-listm = ("mus1.mid","mus2.mid","mus3.mid","mus4.mid")
 
 def round_rectangle(x1, y1, x2, y2, radius=25, **kwargs):
   
@@ -57,20 +56,18 @@ def music_mode():
 
 def open_file_dialog():
     global file_path
-    file_path = filedialog.askopenfilename()
+    file_path = filedialog.askopenfilename(initialdir=r"C:\Users\fishk\OneDrive\Документы\FilesMy\Ritmoved\Musics")
     file_label.config(text=file_path.split("/")[-1])
 
 def start_action():
     global a
     global file_path 
     try:
-      print(file_path)
       midi_data = pretty_midi.PrettyMIDI(file_path)
       pygame.mixer.music.load(file_path)
       pygame.mixer.music.play()
       a = midi_data.get_tempo_changes()[1][0]
       s.sendto(f'Start {a}'.encode('utf-8'), ('192.168.11.1', 9999))
-      print(f'Start {a}')
     except: pass
 
 def stop_action():
